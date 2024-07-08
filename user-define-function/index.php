@@ -9,7 +9,9 @@
     }
 
     if(isset($_POST['btnlogin'])) {
-        $error = login($_POST['email'], $_POST['pass']);
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+        $error = login($email, $pass);
     }
 ?>
 <html>
@@ -31,9 +33,15 @@
                 <tr>
                     <td></td>
                     <td style="color: red;">
-                    <?php
-                    if(isset($error)) echo $error;
-                ?>
+                        <?php
+                            if(isset($error)) echo $error;
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="text" value="<?php if(isset($email)) echo $email." ".$pass; ?>" />
                     </td>
                 </tr>
                 <tr>
