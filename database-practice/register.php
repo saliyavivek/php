@@ -1,6 +1,12 @@
 <?php 
     include("connect.php");
 
+    session_start();
+
+    if(isset($_SESSION["username"])) {
+        header("location: home.php");
+    }
+
     if(isset($_POST["btnregister"])) {
         $name = $_POST["txtname"];
         $address = $_POST["txtaddress"];
@@ -10,6 +16,8 @@
         $insert = "insert into tbl_registration values (0, '$name', '$email', '$password', '$address')";
         if(mysqli_query($connect, $insert)) {
             $success = "User registered successfully.";
+            $_SESSION["username"] = $email;
+            header("location: home.php");
         } else {
             $error = "Failed to register user.";
         }

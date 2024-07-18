@@ -1,6 +1,10 @@
 <?php 
     include("connect.php");
+    session_start();
 
+    if(isset($_SESSION["username"])) {
+        header("location: home.php");
+    }
     
     if(isset($_POST["btnlogin"])) {
         $email = $_POST["txtemail"];
@@ -11,6 +15,9 @@
     function login($email, $password) {
         global $connect;
         $select = "select * from tbl_registration where email='$email' and password='$password'";
+
+        $_SESSION["username"] = $email;
+
         $result = mysqli_query($connect, $select);
         $count = mysqli_num_rows($result);
 
@@ -44,6 +51,12 @@
                 <tr>
                     <td>Password</td>
                     <td><input type="password" name="txtpassword"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        Don't have an account? <a href="register.php">Register</a>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
