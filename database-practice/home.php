@@ -50,6 +50,7 @@
                         <th>Launch Year</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>Edit (using add car form)</th>
                     </tr>
                     <?php 
                         $counter = 1;
@@ -64,6 +65,7 @@
                         <td><?php echo $data['launch_year']; ?></td>
                         <td><a href="edit.php?editId=<?php echo $data['car_id']; ?>">edit</a></td>
                         <td><a href="home.php?deleteId=<?php echo $data['car_id']; ?>" onclick="return confirm('Are you sure you want to delete this record?');">delete</a></td>
+                        <td><a href="addcar.php?editId=<?php echo $data['car_id']; ?>">edit</a></td>
                     </tr>
                     <?php        
                     $counter++;   
