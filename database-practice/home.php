@@ -36,6 +36,10 @@
                         echo $deleteMsg;
                         unset($deleteMsg);
                     }
+                    if(isset($_SESSION["updateMsg"])) {
+                        echo $_SESSION["updateMsg"];
+                        unset($_SESSION["updateMsg"]);
+                    }
                 ?>
             </h2>
             <table border="1">
@@ -58,7 +62,7 @@
                         <td><?php echo $data['car_name']; ?></td>
                         <td><?php echo $data['car_company']; ?></td>
                         <td><?php echo $data['launch_year']; ?></td>
-                        <td><a href="">edit</a></td>
+                        <td><a href="edit.php?editId=<?php echo $data['car_id']; ?>">edit</a></td>
                         <td><a href="home.php?deleteId=<?php echo $data['car_id']; ?>" onclick="return confirm('Are you sure you want to delete this record?');">delete</a></td>
                     </tr>
                     <?php        
