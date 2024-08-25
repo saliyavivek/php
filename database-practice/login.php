@@ -7,9 +7,17 @@
     }
     
     if(isset($_POST["btnlogin"])) {
-        $email = $_POST["txtemail"];
-        $password = $_POST["txtpassword"];
-        $error = login($email, $password);
+        if (empty($_POST["txtemail"])) {
+            $validationEmailErrorMsg = "Email is required.";
+        }
+        if (empty($_POST["txtpassword"])) {
+            $validationPassErrorMsg = "Password is required.";
+        } else {
+            $email = $_POST["txtemail"];
+            $password = $_POST["txtpassword"];
+            $error = login($email, $password);
+        }
+
     }
 
     function login($email, $password) {
@@ -39,18 +47,32 @@
         <?php 
             if(isset($error)) {
                 echo "<p style='color: red;'>".$error."</p>";
-            }
+            }  
         ?>
         </p>
-        <form method="POST">
+        <form method="POST" onsubmit=login();>
             <table>
                 <tr>
                     <td>Email</td>
                     <td><input type="text" name="txtemail"></td>
+                    <td>
+                        <?php 
+                            if(isset($validationEmailErrorMsg)) {
+                                echo "<p style='color: red;'>".$validationEmailErrorMsg."</p>";
+                            }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>Password</td>
                     <td><input type="password" name="txtpassword"></td>
+                    <td>
+                        <?php 
+                            if(isset($validationPassErrorMsg)) {
+                                echo "<p style='color: red;'>".$validationPassErrorMsg."</p>";
+                            }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
